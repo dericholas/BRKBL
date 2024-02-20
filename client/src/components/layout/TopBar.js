@@ -32,6 +32,9 @@ const TopBar = ({ user }) => {
           <li>
             <Link to="/media">New Posts</Link>
           </li>
+          <li>
+            <Link to="/profile">My Profile</Link>
+          </li>
         </ul>
       </div>
       <div className="top-bar-right">
