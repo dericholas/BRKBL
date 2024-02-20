@@ -1,0 +1,6 @@
+
+const postShow = (props) => {
+
+
+    return
+}
