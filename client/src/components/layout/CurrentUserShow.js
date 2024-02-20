@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const UserShow = ({user}) => {
+const CurrentUserShow = ({user}) => {
 
     const [profileData, setProfileData] = useState({})
     const userId = user.id
@@ -26,4 +26,4 @@ const UserShow = ({user}) => {
     )
 
 }
-export default UserShow
+export default CurrentUserShow
