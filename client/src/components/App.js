@@ -12,7 +12,8 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import PostForm from "./layout/postForm";
 import PostList from "./layout/PostList";
-import UserShow from "./layout/UserSHow";
+import CurrentUserShow from "./layout/CurrentUserShow";
+import UserShow from "./layout/UserShow";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -33,11 +34,12 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
+        <Route exact path="/user-profile/:id" component={UserShow}/>
         <Route exact path="/media" component={PostList}/>
         <Route exact path="/" component={PostForm} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
-        <AuthenticatedRoute exact path="/profile" component={UserShow} user={currentUser}/>
+        <AuthenticatedRoute exact path="/profile" component={CurrentUserShow} user={currentUser}/>
       </Switch>
     </Router>
   );

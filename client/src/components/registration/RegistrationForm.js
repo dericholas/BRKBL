@@ -10,8 +10,10 @@ const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
     email: "",
     password: "",
+    username: "",
     passwordConfirmation: "",
   });
+  console.log(userPayload)
 
   const [errors, setErrors] = useState({});
   const [serverErrors, setServerErrors] = useState({});
@@ -20,9 +22,15 @@ const RegistrationForm = () => {
   const validateInput = (payload) => {
     setErrors({});
     setServerErrors({});
-    const { email, password, passwordConfirmation } = payload;
+    const { username, email, password, passwordConfirmation } = payload;
     const emailRegexp = config.validation.email.regexp.emailRegex;
     let newErrors = {};
+    if (username.trim() == "") {
+      newErrors = {
+        ...newErrors,
+        username: "is required",
+      };
+    }
     if (!email.match(emailRegexp)) {
       newErrors = {
         ...newErrors,
@@ -103,6 +111,18 @@ const RegistrationForm = () => {
       <h1>Register</h1>
       <ErrorList errors={serverErrors} />
       <form onSubmit={onSubmit}>
+      <div>
+          <label>
+            Username
+            <input
+              type="text"
+              name="username"
+              value={userPayload.username}
+              onChange={onInputChange}
+            />
+            <FormError error={errors.username} />
+          </label>
+        </div>
         <div>
           <label>
             Email

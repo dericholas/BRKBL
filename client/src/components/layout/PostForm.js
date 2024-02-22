@@ -19,9 +19,7 @@ const PostForm = (props) => {
                 method: "POST",
                 headers: {"Accept": "image/jpeg"},
                 body: newPostBody
-            })
-            console.log("submitPostResponse from postForm", submitPostResponse)
-            
+            })            
             if (!submitPostResponse.ok) {
                 if (submitPostResponse.status === 422) {
                     const serverData = await submitPostResponse.json()

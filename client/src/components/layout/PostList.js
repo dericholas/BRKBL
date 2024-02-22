@@ -8,22 +8,20 @@ const PostList = (props) => {
         try {
             const response = await fetch("/api/v1/media")
             const parsedResponse = await response.json()
-            // console.log("parsedResponse". parsedResponse)
-            setListOfPosts(parsedResponse.posts)
+            setListOfPosts(parsedResponse.postsData)
         } catch(error) {
             console.error(`Error Fetching Post List: ${error}`)
         }
     }
-    
+
     useEffect(() => {
         getPosts()
     }, [])
 
     console.log("listOfPosts", listOfPosts)
-    let postTiles = null;
+    let postTiles = [];
     if (listOfPosts.length > 0) {
         postTiles = listOfPosts.map((post) => {
-            console.log("post", post)
             return (
                 <PostTile
                     key={post.id}
@@ -32,8 +30,7 @@ const PostList = (props) => {
             )
         })
     }
-    console.log("postTiles", postTiles)
-
+    
     return (
         <>
             <h1>Hello</h1>

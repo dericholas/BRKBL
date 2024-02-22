@@ -20,6 +20,7 @@ const CurrentUserShow = ({user}) => {
         getUserData()
     }, [])
 
+    const postList = profileData.posts
 
     return (
         <h2>sup nerdz</h2>
