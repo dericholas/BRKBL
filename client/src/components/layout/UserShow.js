@@ -3,10 +3,11 @@ import { Link } from "react-router-dom"
 
 import UserPostTile from "./UserPostTile";
 
-const UserShow = (props) => {
+const UserShow = ({match, currentUser}) => {
+
 
     const [profileData, setProfileData] = useState([])
-    const userId = props.match.params.id
+    let userId = match.params.id
 
     const getUserData = async () => {
         try {
@@ -18,26 +19,64 @@ const UserShow = (props) => {
             console.error(error)
         }
     }
-    console.log("profileData", profileData.user)
+    console.log("profileData", profileData)
     useEffect(() => {
         getUserData()
-    }, [])
+    }, [userId])
+
+    const handleFollow = async (event) => {
+        event.preventDefault()
+        try {
+            const followResponse = await fetch("/api/v1/user-profile/", {})
+
+        } catch(error) {
+
+        }
+    }
+
+    let currentUserIsFollowing = false
+    let currentUserIsFollowed = false
     let followerList = []
+    let followerCount = 0
     let postTiles = []
     let followingList = []
+    let followingCount = 0
     let username = ""
     let formattedDate = ""
-    if (profileData.posts) {
-        postTiles = profileData.posts.map((post) => {
+    let followButton = (
+        <button className="button" >
+            Follow
+        </button>
+    )
+
+
+    if (Object.keys(profileData).length > 0) {
+        const {user, followers, followings, posts} = profileData
+        username = user.username
+
+        postTiles = posts.map((post) => {
             return (
                 <UserPostTile key={post.id}
                     post={post}
                 />
             )
         })
-    }
-    if (profileData.followers) {
-        followerList = profileData.followers.map((follower) => {
+    
+        currentUserIsFollowing = followers.map((follower) => follower.id).includes(currentUser.id)
+        if (currentUserIsFollowing) {
+            followButton = (
+            <button className="button" >
+                Unfollow
+            </button>
+            )
+        } else {
+            <button className="button" onClick={handleFollow} >
+                Follow
+            </button>
+        }
+        
+        followerCount = followers.length
+        followerList = followers.map((follower) => {
             return (
                 <li key={follower.id}>
                     <Link to={`/user-profile/${follower.id}`}>
@@ -46,10 +85,10 @@ const UserShow = (props) => {
                 </li>
             )
         })
-    }
 
-    if (profileData.followings) {
-        followingList = profileData.followings.map((following) => {
+        currentUserIsFollowed = followings.map((following) => following.id).includes(currentUser.id)
+        followingCount = followings.length
+        followingList = followings.map((following) => {
             return (
                 <li key={following.id}>
                     <Link to={`/user-profile/${following.id}`}>
@@ -58,26 +97,33 @@ const UserShow = (props) => {
                 </li>
             )
         })
-        const createdAt = new Date(profileData.user.createdAt)
+        const createdAt = new Date(user.createdAt)
         formattedDate = createdAt.toLocaleDateString()
     }
-    if (profileData.user) {
-        username = profileData.user.username
-    }
+
+
+
+    // if (profileData.user.followers.includes(key))
+        
 
 
 
 
-
-
-// username = profileData.user.username
 
             
     return (
         <>
         <h3>{username}</h3>
+        {followButton}
             <h2>member since: {formattedDate}</h2>
-            <ul>{followerList}</ul>
+            <div>
+                <h6>Followers: {followerCount}</h6>
+                <ul>{followerList}</ul>
+            </div>
+            <div>
+                <h6>Following: {followingCount}</h6>
+                <ul>{followingList}</ul>
+            </div>
             <ul>
                 {postTiles}
             </ul>
