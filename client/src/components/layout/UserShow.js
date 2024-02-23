@@ -13,13 +13,11 @@ const UserShow = ({match, currentUser}) => {
         try {
             const fetchedProfileData = await fetch(`/api/v1/user-profile/${userId}`)
             const parsedProfileData = await fetchedProfileData.json()
-            console.log("parsedProfileData", parsedProfileData)
             setProfileData(parsedProfileData)
         } catch (error) {
             console.error(error)
         }
     }
-    console.log("profileData", profileData)
     useEffect(() => {
         getUserData()
     }, [userId])
@@ -60,7 +58,7 @@ const UserShow = ({match, currentUser}) => {
                     post={post}
                 />
             )
-        })
+        }) 
     
         currentUserIsFollowing = followers.map((follower) => follower.id).includes(currentUser.id)
         if (currentUserIsFollowing) {
@@ -101,9 +99,6 @@ const UserShow = ({match, currentUser}) => {
         formattedDate = createdAt.toLocaleDateString()
     }
 
-
-
-    // if (profileData.user.followers.includes(key))
         
 
 

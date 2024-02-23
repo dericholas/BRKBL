@@ -10,7 +10,7 @@ import getCurrentUser from "../services/getCurrentUser";
 import RegistrationForm from "./registration/RegistrationForm";
 import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
-import PostForm from "./layout/postForm";
+import PostForm from "./layout/PostForm";
 import PostList from "./layout/PostList";
 import CurrentUserShow from "./layout/CurrentUserShow";
 import UserShow from "./layout/UserShow";

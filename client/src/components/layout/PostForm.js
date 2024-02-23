@@ -19,7 +19,7 @@ const PostForm = (props) => {
                 method: "POST",
                 headers: {"Accept": "image/jpeg"},
                 body: newPostBody
-            })            
+            })
             if (!submitPostResponse.ok) {
                 if (submitPostResponse.status === 422) {
                     const serverData = await submitPostResponse.json()
@@ -42,11 +42,11 @@ const PostForm = (props) => {
             [event.currentTarget.name]: event.currentTarget.value
         }
         )
-        console.log("newPost", newPost)
     }
     const handleImageUpload = (acceptedImage) => {
         setNewPost({...newPost, image: acceptedImage[0]})
     }
+
     return (
         <>
             <form onSubmit={submitPost} className="post-form">
@@ -69,4 +69,5 @@ const PostForm = (props) => {
         </>
     )
 }
+
 export default PostForm

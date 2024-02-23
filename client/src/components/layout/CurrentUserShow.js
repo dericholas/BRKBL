@@ -9,13 +9,11 @@ const CurrentUserShow = ({user}) => {
         try {
             const fetchedProfileData = await fetch(`/api/v1/profile/${userId}`)
             const parsedProfileData = await fetchedProfileData.json()
-            console.log("parsedProfileData", parsedProfileData)
             setProfileData(parsedProfileData)
         } catch (error) {
             console.error(error)
         }
     }
-    console.log("profileData", profileData)
     useEffect(() => {
         getUserData()
     }, [])
