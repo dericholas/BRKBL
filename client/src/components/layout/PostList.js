@@ -18,7 +18,6 @@ const PostList = (props) => {
         getPosts()
     }, [])
 
-    console.log("listOfPosts", listOfPosts)
     let postTiles = [];
     if (listOfPosts.length > 0) {
         postTiles = listOfPosts.map((post) => {
