@@ -34,7 +34,9 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        <Route exact path="/user-profile/:id" component={UserShow}/>
+        <Route exact path="/user-profile/:id" render={routeProps => (
+          <UserShow {...routeProps} currentUser={currentUser} />
+        )} />
         <Route exact path="/media" component={PostList}/>
         <Route exact path="/" component={PostForm} />
         <Route exact path="/users/new" component={RegistrationForm} />
