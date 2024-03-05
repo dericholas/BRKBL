@@ -8,15 +8,12 @@ import PostSerializer from "../../../serializers/PostSerializer.js";
 mediaRouter.get("/", async (req, res) => {
     try {
       const posts = await Post.query()
-      console.log("posts from mediarouter", posts)
       const postsData = await Promise.all(posts.map(async (post) => {
         const serializedPost = PostSerializer.getPostDetails(post)
         const userData = await PostSerializer.getUserDetails(post)
         serializedPost.owner = userData
-        console.log("userData", userData)
         return serializedPost
       }))
-      console.log("postsData", postsData)
       return res.status(200).json({ postsData })
     } catch (error) {
       return res.status(500).json({ errors: error })

@@ -107,22 +107,24 @@ const UserShow = ({match, currentUser}) => {
 
             
     return (
-        <>
+        <div className="user-show">
         <h3>{username}</h3>
         {followButton}
             <h2>member since: {formattedDate}</h2>
-            <div>
+            <div className="followers-dropdown">
                 <h6>Followers: {followerCount}</h6>
                 <ul>{followerList}</ul>
             </div>
-            <div>
+            <div className="followings-dropdown">
                 <h6>Following: {followingCount}</h6>
                 <ul>{followingList}</ul>
+            </div >
+            <div className="post-list">
+                <ul>
+                    {postTiles}
+                </ul>
             </div>
-            <ul>
-                {postTiles}
-            </ul>
-        </>
+        </div>
     )
 
 }

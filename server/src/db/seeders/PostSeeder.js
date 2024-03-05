@@ -16,13 +16,13 @@ class PostSeeder {
             { caption: "Carving turns like there's no tomorrow!", image: "https://brkbl-production.s3.amazonaws.com/guillaume-groult-HYUAgt8vGtA-unsplash.jpg", userId: null },
             { caption: "Skiing through a winter wonderland!", image: "https://brkbl-production.s3.amazonaws.com/haut-risque-3WqzE236Hhw-unsplash.jpg", userId: null },
             { caption: "Embracing the thrill of the mountain.", image: "https://brkbl-production.s3.amazonaws.com/joris-berthelot-EnTU_hr9wPA-unsplash.jpg", userId: null },
+            { caption: "Skiing: the perfect blend of grace and adrenaline.", image: "https://brkbl-production.s3.amazonaws.com/wojciech-then-tUWAb8f7UZw-unsplash.jpg", userId: null },
             { caption: "Skiing under a blanket of stars – pure magic!", image: "https://brkbl-production.s3.amazonaws.com/lovovna-IMoNduugud0-unsplash.jpg", userId: null },
+            { caption: "Snowboarding: where every day is a snow day!", image: "https://brkbl-production.s3.amazonaws.com/visit-almaty-wN4D-mVR7fE-unsplash.jpg", userId: null },
             { caption: "Sending it off cliffs and dropping into powder.", image: "https://brkbl-production.s3.amazonaws.com/matthieu-petiard-Pf6e3o0GL4M-unsplash.jpg", userId: null },
             { caption: "Finding freedom in every carve.", image: "https://brkbl-production.s3.amazonaws.com/max-kukurudziak-_8h7TrklnHQ-unsplash.jpg", userId: null },
             { caption: "Powder slashes and endless smiles!", image: "https://brkbl-production.s3.amazonaws.com/patrick-t-kindt-NzU9rrmaBu4-unsplash.jpg", userId: null },
             { caption: "Exploring new lines and pushing limits.", image: "https://brkbl-production.s3.amazonaws.com/perfect-snacks-SaRcln5IcE8-unsplash.jpg", userId: null },
-            { caption: "Snowboarding: where every day is a snow day!", image: "https://brkbl-production.s3.amazonaws.com/visit-almaty-wN4D-mVR7fE-unsplash.jpg", userId: null },
-            { caption: "Skiing: the perfect blend of grace and adrenaline.", image: "https://brkbl-production.s3.amazonaws.com/wojciech-then-tUWAb8f7UZw-unsplash.jpg", userId: null }
         ];
 
         const userArray = await User.query()

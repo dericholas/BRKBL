@@ -27,16 +27,16 @@ const PostList = (props) => {
                     post={post}
                 />
             )
-        })
+        }).reverse()
     }
     
     return (
-        <>
-            <h1>Hello</h1>
+        <div className="post-list">
             <ul>
+                <h1>New Media</h1>
                 {postTiles}
             </ul>
-        </>
+        </div>
       )
 }
 
