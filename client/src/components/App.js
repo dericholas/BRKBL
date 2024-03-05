@@ -34,11 +34,11 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
+        <Route exact path="/" component={PostList} />
+        <Route exact path="/media" component={PostForm}/>
         <Route exact path="/user-profile/:id" render={routeProps => (
           <UserShow {...routeProps} currentUser={currentUser} />
         )} />
-        <Route exact path="/media" component={PostList}/>
-        <Route exact path="/" component={PostForm} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
         <AuthenticatedRoute exact path="/profile" component={CurrentUserShow} user={currentUser}/>

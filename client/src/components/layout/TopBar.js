@@ -25,12 +25,12 @@ const TopBar = ({ user }) => {
     <div className="top-bar">
       <div className="top-bar-left">
         <ul className="menu">
-          <li className="menu-text">App</li>
+          <h5 className="menu-text">SNOW-BOARDS </h5>
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/media">New Posts</Link>
+            <Link to="/media">Make a Post</Link>
           </li>
           <li>
             <Link to="/profile">My Profile</Link>

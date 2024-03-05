@@ -17,7 +17,7 @@ const PostForm = (props) => {
         try {
             const submitPostResponse = await fetch("/api/v1/media", {
                 method: "POST",
-                headers: {"Accept": "image/jpeg"},
+                headers: { "Accept": "image/jpeg" },
                 body: newPostBody
             })
             if (!submitPostResponse.ok) {
@@ -35,6 +35,7 @@ const PostForm = (props) => {
             console.error(`Error in POST: ${error}`)
         }
     }
+
     const handleChange = (event) => {
         event.preventDefault()
         setNewPost({
@@ -43,30 +44,44 @@ const PostForm = (props) => {
         }
         )
     }
-    const handleImageUpload = (acceptedImage) => {
-        setNewPost({...newPost, image: acceptedImage[0]})
+
+    const deleteImage = () => {
+        setNewPost({ ...newPost, image: null });
     }
 
+    const handleImageUpload = (acceptedImage) => {
+        setNewPost({ ...newPost, image: acceptedImage[0] })
+    }
+
+
     return (
-        <>
+        <div className="post-form-page">
+            <h1>Share Something Cool!</h1>
             <form onSubmit={submitPost} className="post-form">
-                <h1>make a new post</h1>
-                <label htmlFor="caption" className="post-form">Caption:
-                    <input name="caption" type="text" onChange={handleChange} />
+                {newPost.image ? (
+                    <div className="file-drop">
+                        <img src={URL.createObjectURL(newPost.image)} alt="Preview" />
+                        <button onClick={deleteImage}>delete</button>
+                    </div>
+                ) : (
+                    <Dropzone onDrop={handleImageUpload}>
+                        {({ getRootProps, getInputProps }) => (
+                            <section>
+                                <div {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    <img src="https://colorlib.com/wp-content/uploads/sites/2/jquery-file-upload-scripts.png" alt="Click to Browse or Drag and Drop Files" />
+                                </div>
+                            </section>
+                        )}
+                    </Dropzone>
+                )
+                }
+                <label htmlFor="caption" >Caption:
+                    <textarea name="caption" type="text" onChange={handleChange} placeholder="Give us the deets" />
                 </label>
-                <Dropzone onDrop={handleImageUpload}>
-                    {({getRootProps, getInputProps}) => (
-                        <section>
-                            <div {...getRootProps()}>
-                                <input {...getInputProps()} />
-                                <p>Drag 'n' drop some files here, or click to select files</p>
-                            </div>
-                        </section>
-                    )}
-                </Dropzone>
                 <input type="submit" value="POST!" id="submit-post" />
             </form>
-        </>
+        </div>
     )
 }
 
