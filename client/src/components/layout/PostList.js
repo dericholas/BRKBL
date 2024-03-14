@@ -17,7 +17,7 @@ const PostList = (props) => {
     useEffect(() => {
         getPosts()
     }, [])
-
+    console.log("listOfPosts", listOfPosts)
     let postTiles = [];
     if (listOfPosts.length > 0) {
         postTiles = listOfPosts.map((post) => {
