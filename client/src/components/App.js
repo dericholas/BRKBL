@@ -41,7 +41,7 @@ const App = (props) => {
         )} />
         <Route exact path="/users/new" component={RegistrationForm} />
         <Route exact path="/user-sessions/new" component={SignInForm} />
-        <AuthenticatedRoute exact path="/profile" component={CurrentUserShow} user={currentUser}/>
+        <AuthenticatedRoute exact path="/my-profile" component={CurrentUserShow} user={currentUser}/>
       </Switch>
     </Router>
   );

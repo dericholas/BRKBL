@@ -12,7 +12,7 @@ userDataRouter.get("/:id", async (req, res) => {
         const queriedUser = await User.query().findById(userId)
         userProfileData.user = queriedUser
         console.log("queriedUser", queriedUser)
-         const queriedPosts = await queriedUser.$relatedQuery("posts")
+        const queriedPosts = await queriedUser.$relatedQuery("posts")
         userProfileData.posts = await Promise.all(queriedPosts.map(async (post) => {
             const serializedPost = PostSerializer.getPostDetails(post)
             const userData = await PostSerializer.getUserDetails(post)

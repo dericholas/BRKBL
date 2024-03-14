@@ -33,7 +33,7 @@ const TopBar = ({ user }) => {
             <Link to="/media">Make a Post</Link>
           </li>
           <li>
-            <Link to="/profile">My Profile</Link>
+            <Link to="/my-profile">My Profile</Link>
           </li>
         </ul>
       </div>
