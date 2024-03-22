@@ -5,7 +5,6 @@ import UserPostTile from "./UserPostTile";
 
 const UserShow = ({match, currentUser}) => {
 
-
     const [profileData, setProfileData] = useState([])
     let userId = match.params.id
 
