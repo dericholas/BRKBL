@@ -1,40 +1,17 @@
-# Engage Boilerplate
+# SNOW-BOARDS
+
+## Description
+
+SNOW-BOARDS is a social media platform designed specifically for the skiing and snowboarding community. Leveraging the power of React.js for its dynamic and responsive front end, and Express.js for its robust backend, SNOW-BOARDS provides a unique space for enthusiasts to share their experiences, connect with fellow adventurers, and plan their next skiing or snowboarding trip.
+
+The platform was developed with the goal of fostering a vibrant community where users can upload photos and videos captured on the slopes, engage in discussions, and share their passion for the outdoors. By offering features such as trip planning, media sharing, and a platform for users to connect and interact, SNOW-BOARDS aims to be the go-to destination for all things related to skiing and snowboarding.
+
 
 ## Installation
 
 For a copy of this repository please `Download ZIP` (found under the green `Code` button).
 
-After unpacking the ZIP you can rename the folder/ directory for your new project.
-
-### Rename Boilerplate
-
-The application will have all configurations set up with the name `engage-boilerplate`. You can change the name to match and be consistent with the name of your project. To do this, use a global search (using the Search magnifying glass in VSCode) to look for all instances of `engage-boilerplate` and replace it with the hyphenated name of your project (the search should find references to files with your database names, `package.json` files, etc.).
-
-## Adding to GitHub
-
-1. Initialize your project with GitHub in the terminal:
-
-   ```sh
-   git init
-   git add .
-   git commit -m "initial commit"
-   ```
-
-2. Create a new repository on your GitHub:
-
-   - From your GitHub page in the browser, click on the tab for `Repositories`, then click the green button for `New`
-   - Add a Repository name - for simplicity, you might use the same name that you chose for the project
-   - Select `Public` for the type of repository if you want others to see your work
-   - Skip any options that mention adding additional files (such as a README.md or .gitignore)
-   - Click `Create Repository`
-
-3. On the next page, you will see sets of terminal commands. Use the option to `push an existing repository from the command line`:
-
-   ```sh
-   git remote add origin <- use the provided URL to your repo on GitHub ->
-   git branch -M main
-   git push -u origin main
-   ```
+### 
 
 ## Usage
 
@@ -47,13 +24,13 @@ The application will have all configurations set up with the name `engage-boiler
 2. In the root of the `server` folder, create a `.env` file to hold the session secret. This will allow Passport to keep track of the currently signed-in user in session. Include a SESSION_SECRET in the `.env`:
 
    ```env
-   SESSION_SECRET="ff521741-6d5a-48d2-96a9-b95bbcf60bc4"
+   SESSION_SECRET=""
    ```
 
 3. Create your base PostgreSQL database. Check the `server/src/config/getDatabaseUrl` file for the name of the `development` database. For example:
 
    ```sh
-   createdb engage-boilerplate_development
+   createdb snow_boards_development
    ```
 
 4. Run the included `users` table migration:
@@ -71,4 +48,4 @@ The application will have all configurations set up with the name `engage-boiler
    yarn run dev
    ```
 
-6. Navigate to <http://localhost:3000>. You should see the text "Hello from react". Ensure you can sign up, sign in, and sign out users.
+6. Navigate to <http://localhost:3000>. You should see the text "". Ensure you can sign up, sign in, and sign out users.
