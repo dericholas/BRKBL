@@ -2,6 +2,7 @@ import express from "express";
 
 import { User } from "../../../models/index.js";
 import PostSerializer from "../../../serializers/PostSerializer.js";
+import UserSerializer from "../../../serializers/UserSerializer.js";
 
 const userDataRouter = new express.Router()
 
@@ -9,19 +10,17 @@ userDataRouter.get("/:id", async (req, res) => {
     const userId = req.params.id
     try {
         const userProfileData = {}
-        const queriedUser = await User.query().findById(userId)
-        userProfileData.user = queriedUser
-        console.log("queriedUser", queriedUser)
-         const queriedPosts = await queriedUser.$relatedQuery("posts")
-        userProfileData.posts = await Promise.all(queriedPosts.map(async (post) => {
-            const serializedPost = PostSerializer.getPostDetails(post)
-            const userData = await PostSerializer.getUserDetails(post)
-            serializedPost.owner = userData
-            console.log("userData", userData)
+        const postOwner = await User.query().findById(userId)
+        console.log("postOwner", postOwner)
+        const queriedPosts = await postOwner.$relatedQuery("posts")
+        userProfileData.user = UserSerializer.serializeUser(postOwner)
+        userProfileData.posts = await Promise.all(queriedPosts.map(async (postObject) => {
+            const serializedPost = PostSerializer.getPostDetails({postObject, postOwner})
+            // const userData = await PostSerializer.getUserDetails(post)
             return serializedPost
         }))
-        userProfileData.followers = await queriedUser.$relatedQuery("followers")
-        userProfileData.followings = await queriedUser.$relatedQuery("followings")
+        userProfileData.followers = await postOwner.$relatedQuery("followers")
+        userProfileData.followings = await postOwner.$relatedQuery("followings")
         console.log("userProfileData", userProfileData)
         return res.status(200).json(userProfileData)
     } catch (error) {
