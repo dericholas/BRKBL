@@ -6,13 +6,14 @@ import FollowingTile from "./FollowingTile.js";
 const CurrentUserShow = ({user}) => {
 
     const [profileData, setProfileData] = useState({})
+    const [showFollowings, setShowFollowings] = useState(false)
+    const [showFollowers, setShowFollowers] = useState(false)
     const userId = user.id
 
     const getUserData = async () => {
         try {
-            const fetchedProfileData = await fetch(`/api/v1/current-user/${userId}`)
+            const fetchedProfileData = await fetch(`/api/v1/current-user`)
             const parsedProfileData = await fetchedProfileData.json()
-            console.log("parsedProfileData", parsedProfileData)
             setProfileData(parsedProfileData)
         } catch (error) {
             console.error(error)
@@ -26,27 +27,11 @@ const CurrentUserShow = ({user}) => {
 
     let postTiles = []
     let followerTiles = []
-    let followerCount = `Followers: ${followerTiles.length}`
     let followingTiles = []
-    let followingCount = `Following: ${followingTiles.length}`
+    let followerCount = "0"
+    let followingCount = "0"
     let username = ""
     let formattedDate = ""
-    
-    let followerIds = []
-    let followingIds = []
-
-
-    // const followButton = (id) => {
-    //     let following = false
-    //     if (followingIds.includes(id)) {
-    //         following = true
-    //     }
-    //     return (
-    //         <button onClick={() => handleFollow(id, following)}>
-    //             {following ? "Unfollow" : "Follow"}
-    //         </button>
-    //     )
-    // }
 
 
 
@@ -74,56 +59,29 @@ const CurrentUserShow = ({user}) => {
                 />
             )
         })
+        followerCount = `Followers: ${followerTiles.length}`
+
         followingTiles = followings.map((following) => {
             return (<FollowingTile key={following.id}
-                    id={following.id}
-                    username={following.username}
-                    isFollowed={following.isFollowed}
-                    isFollowing={following.isFollowing}
+                id={following.id}
+                username={following.username}
+                isFollowed={following.isFollowed}
+                isFollowing={following.isFollowing}
                 />
-            )
-        })
-
-
-
-
-        // followerIds = followers.map((follower) => {
-        //     return follower.id
-        // })
-
-        // followingIds = followings.map((following) => {
-        //     return following.id
-        // })
-
-        // followerList = followers.map((follower) => {
-        //     return (
-        //         <li key={follower.id}>
-        //            {follower.username}
-        //            {followButton(follower.id)}
-        //         </li>
-        //     )
-        // })
-
-        // followingList = followings.map((following) => {
-        //     let mutualFollow = false
-        //     if (followerIds.includes(following.id)) {
-        //         mutualFollow = true
-        //     }
-        //     return (
-        //         <li key={following.id}>
-        //            {following.username}
-        //            {mutualFollow ? "Follows You" : null}
-        //            {followButton(following.id)}
-        //         </li>
-        //     )
-        // })
+                )
+            })
+        followingCount = `Following: ${followingTiles.length}`
         
-
-
-
-
-
     }
+    const handleFollowingList = (event) => {
+        event.preventDefault()
+        setShowFollowings(!showFollowings)
+    }
+    const handleFollowerList = (event) => {
+        event.preventDefault()
+        setShowFollowers(!showFollowers)
+    }
+    
 
 
 
@@ -133,12 +91,20 @@ const CurrentUserShow = ({user}) => {
             <h3>{username}</h3>
             <h4>member since: {formattedDate}</h4>
             <div className="followers-dropdown">
-                <h6>{followerCount}</h6>
-                <ul>{followerTiles}</ul>
+                <h6 onClick={handleFollowerList}>{followerCount}</h6>
+                {showFollowers ? (
+                    <ul>{followerTiles}</ul>
+                ) : 
+                    null
+                }
             </div>
             <div className="followings-dropdown">
-                <h6>{followingCount}</h6>
-                <ul>{followingTiles}</ul>
+                <h6 onClick={handleFollowingList}>{followingCount}</h6>
+                {showFollowings ? (
+                    <ul>{followingTiles}</ul>
+                ) : 
+                    null
+                }
             </div>
             <div className="post-list">
                  <ul>
