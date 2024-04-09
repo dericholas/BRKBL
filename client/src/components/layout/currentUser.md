@@ -31,8 +31,8 @@ currentUser: {
             currentUserIsFollowing
         }
     ]
-    followers: [
-        follower: {
+    followings: [
+        following: {
             id
             username
             currentUserIsFollowed

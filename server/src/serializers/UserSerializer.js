@@ -1,7 +1,7 @@
 class UserSerializer {
     static serializeUser(user) {
         const cleanedUserObject = {}
-        const allowedAttributes = ["id", "email", "createdAt"]
+        const allowedAttributes = ["id", "username", "createdAt"]
         for (const attribute of allowedAttributes) {
             cleanedUserObject[attribute] = user[attribute]
         }

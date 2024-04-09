@@ -6,24 +6,29 @@ const currentUserRouter = new express.Router()
 
 
 currentUserRouter.get("/:id", async (req, res) => {
-    const currentUserId = req.params.id
-    console.log("req.user.id:", req.user.id)
+    const currentUserId = req.user.id
+    console.log("currentUserId:", currentUserId)
     try {
         const userProfileData = {}
         const queriedUser = await User.query().findById(currentUserId)
         userProfileData.currentUser = queriedUser
 
-        // const queriedFollowers = await queriedUser.$relatedQuery("followers")
-        // userProfileData.followers = await Promise.all(queriedFollowers.map(async (followObject) => {
-        //     const serializedFollow = await FollowSerializer.getFollowDetails(followObject, currentUserId)
-        //     console.log(serializedFollow)
-        //     return serializedFollow
-        // }))
-        // const queriedFollowings = await queriedUser.$relatedQuery("followings")
-        // userProfileData.followings = await Promise.all(queriedFollowings.map(async (followObject) => {
-        //     const serializedFollow = await FollowSerializer.getFollowDetails(followObject, currentUserId)
-        //     return serializedFollow
-        // }))
+        const queriedFollowers = await queriedUser.$relatedQuery("followers")
+        console.log("queriedFollowers:", queriedFollowers)
+
+        userProfileData.followers = await Promise.all(queriedFollowers.map(async (userObject) => {
+            const serializedFollow = await FollowSerializer.getFollowDetails(userObject, currentUserId)
+            console.log("serializedFollow", serializedFollow)
+            return serializedFollow
+        }))
+        console.log("userProfileData.followers", userProfileData.followers)
+        const queriedFollowings = await queriedUser.$relatedQuery("followings")
+        console.log("queriedFollowings", queriedFollowings)
+
+        userProfileData.followings = await Promise.all(queriedFollowings.map(async (userObject) => {
+            const serializedFollow = await FollowSerializer.getFollowDetails(userObject, currentUserId)
+            return serializedFollow
+        }))
 
         const queriedPosts = await queriedUser.$relatedQuery("posts")
         userProfileData.posts = await Promise.all(queriedPosts.map(async (post) => {
@@ -41,3 +46,4 @@ currentUserRouter.get("/:id", async (req, res) => {
 
 
   export default currentUserRouter
+

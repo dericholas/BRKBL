@@ -1,10 +1,7 @@
-
 class PostSerializer {
-    static async getPostDetails(postObject) {
+    static async getPostDetails({postObject, postOwner}) {
         const allowedAttributes = ["id", "image", "caption", "createdAt"]
         const allowedUserAttributes = ["id", "username"]
-
-        const postOwner = await postObject.$relatedQuery("user")
 
         let serializedPostObject = {
             owner: {}
@@ -19,8 +16,6 @@ class PostSerializer {
     
         return serializedPostObject
     }
-
-
 
 }
 

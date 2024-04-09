@@ -12,6 +12,7 @@ const UserShow = ({match, currentUser}) => {
         try {
             const fetchedProfileData = await fetch(`/api/v1/user-profile/${userId}`)
             const parsedProfileData = await fetchedProfileData.json()
+            console.log("parsedProfileData", parsedProfileData)
             setProfileData(parsedProfileData)
         } catch (error) {
             console.error(error)
@@ -59,41 +60,41 @@ const UserShow = ({match, currentUser}) => {
             )
         }) 
     
-        currentUserIsFollowing = followers.map((follower) => follower.id).includes(currentUser.id)
-        if (currentUserIsFollowing) {
-            followButton = (
-            <button className="button" >
-                Unfollow
-            </button>
-            )
-        } else {
-            <button className="button" onClick={handleFollow} >
-                Follow
-            </button>
-        }
+        // currentUserIsFollowing = followers.map((follower) => follower.id).includes(currentUser.id)
+        // if (currentUserIsFollowing) {
+        //     followButton = (
+        //     <button className="button" >
+        //         Unfollow
+        //     </button>
+        //     )
+        // } else {
+        //     <button className="button" onClick={handleFollow} >
+        //         Follow
+        //     </button>
+        // }
         
-        followerCount = followers.length
-        followerList = followers.map((follower) => {
-            return (
-                <li key={follower.id}>
-                    <Link to={`/user-profile/${follower.id}`}>
-                        {follower.username}
-                    </Link>
-                </li>
-            )
-        })
+        // followerCount = followers.length
+        // followerList = followers.map((follower) => {
+        //     return (
+        //         <li key={follower.id}>
+        //             <Link to={`/user-profile/${follower.id}`}>
+        //                 {follower.username}
+        //             </Link>
+        //         </li>
+        //     )
+        // })
 
-        currentUserIsFollowed = followings.map((following) => following.id).includes(currentUser.id)
-        followingCount = followings.length
-        followingList = followings.map((following) => {
-            return (
-                <li key={following.id}>
-                    <Link to={`/user-profile/${following.id}`}>
-                        {following.username}
-                    </Link>
-                </li>
-            )
-        })
+        // currentUserIsFollowed = followings.map((following) => following.id).includes(currentUser.id)
+        // followingCount = followings.length
+        // followingList = followings.map((following) => {
+        //     return (
+        //         <li key={following.id}>
+        //             <Link to={`/user-profile/${following.id}`}>
+        //                 {following.username}
+        //             </Link>
+        //         </li>
+        //     )
+        // })
         const createdAt = new Date(user.createdAt)
         formattedDate = createdAt.toLocaleDateString()
     }

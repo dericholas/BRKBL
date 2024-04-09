@@ -12,6 +12,7 @@ const CurrentUserShow = ({user}) => {
         try {
             const fetchedProfileData = await fetch(`/api/v1/current-user/${userId}`)
             const parsedProfileData = await fetchedProfileData.json()
+            console.log("parsedProfileData", parsedProfileData)
             setProfileData(parsedProfileData)
         } catch (error) {
             console.error(error)
@@ -63,19 +64,25 @@ const CurrentUserShow = ({user}) => {
             )
         })
         
-        // followerTiles = followers.map((follower) => {
-        //     return (
-        //         <FollowerTile key={follower.id}
-                
-        //         />
-        //     )
-        // })
-        // followingTiles = followings.map((following) => {
-        //     return (<FollowingTile key={following.id}
-                
-        //         />
-        //     )
-        // })
+        followerTiles = followers.map((follower) => {
+            return (
+                <FollowerTile key={follower.id}
+                id={follower.id}
+                username={follower.username}
+                isFollowed={follower.isFollowed}
+                isFollowing={follower.isFollowing}
+                />
+            )
+        })
+        followingTiles = followings.map((following) => {
+            return (<FollowingTile key={following.id}
+                    id={following.id}
+                    username={following.username}
+                    isFollowed={following.isFollowed}
+                    isFollowing={following.isFollowing}
+                />
+            )
+        })
 
 
 
@@ -126,12 +133,12 @@ const CurrentUserShow = ({user}) => {
             <h3>{username}</h3>
             <h4>member since: {formattedDate}</h4>
             <div className="followers-dropdown">
-                <h6>Followers: {followerCount}</h6>
-                {/* <ul>{followerTiles}</ul> */}
+                <h6>{followerCount}</h6>
+                <ul>{followerTiles}</ul>
             </div>
             <div className="followings-dropdown">
-                <h6>Following: {followingCount}</h6>
-                {/* <ul>{followingTiles}</ul> */}
+                <h6>{followingCount}</h6>
+                <ul>{followingTiles}</ul>
             </div>
             <div className="post-list">
                  <ul>

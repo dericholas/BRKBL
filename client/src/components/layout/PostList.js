@@ -8,6 +8,7 @@ const PostList = (props) => {
         try {
             const response = await fetch("/api/v1/media")
             const parsedResponse = await response.json()
+            console.log("FROM POSTLIST", parsedResponse)
             setListOfPosts(parsedResponse.postsData)
         } catch(error) {
             console.error(`Error Fetching Post List: ${error}`)
