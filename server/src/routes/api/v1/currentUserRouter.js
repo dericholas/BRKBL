@@ -31,8 +31,9 @@ currentUserRouter.get("/:id", async (req, res) => {
         }))
 
         const queriedPosts = await queriedUser.$relatedQuery("posts")
-        userProfileData.posts = await Promise.all(queriedPosts.map(async (post) => {
-            const serializedPost = await PostSerializer.getPostDetails(post)
+        userProfileData.posts = await Promise.all(queriedPosts.map(async (postObject) => {
+            const postOwner = queriedUser
+            const serializedPost = await PostSerializer.getPostDetails({postObject, postOwner})
             return serializedPost
         }))
         
