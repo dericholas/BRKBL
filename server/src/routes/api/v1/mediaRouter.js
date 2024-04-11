@@ -13,10 +13,8 @@ mediaRouter.get("/", async (req, res) => {
         const serializedPost = PostSerializer.getPostDetails({postObject, postOwner})
         return serializedPost
       }))
-      console.log("POSTSDATA FROM mediaRouter", postsData)
       return res.status(200).json({ postsData })
     } catch (error) {
-      console.error("ERROR", error)
       return res.status(500).json({ errors: error })
     }
 })

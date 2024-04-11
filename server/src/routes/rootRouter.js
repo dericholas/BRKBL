@@ -18,6 +18,4 @@ rootRouter.use("/api/v1/user-profile", userDataRouter)
 rootRouter.use("/api/v1/current-user", currentUserRouter)
 rootRouter.use("/api/v1/follows", followRouter)
 
-// place your server-side routes here
-
 export default rootRouter;

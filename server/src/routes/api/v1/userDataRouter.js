@@ -11,17 +11,14 @@ userDataRouter.get("/:id", async (req, res) => {
     try {
         const userProfileData = {}
         const postOwner = await User.query().findById(userId)
-        console.log("postOwner", postOwner)
         const queriedPosts = await postOwner.$relatedQuery("posts")
         userProfileData.user = UserSerializer.serializeUser(postOwner)
         userProfileData.posts = await Promise.all(queriedPosts.map(async (postObject) => {
             const serializedPost = PostSerializer.getPostDetails({postObject, postOwner})
-            // const userData = await PostSerializer.getUserDetails(post)
             return serializedPost
         }))
         userProfileData.followers = await postOwner.$relatedQuery("followers")
         userProfileData.followings = await postOwner.$relatedQuery("followings")
-        console.log("userProfileData", userProfileData)
         return res.status(200).json(userProfileData)
     } catch (error) {
         console.log(error)
